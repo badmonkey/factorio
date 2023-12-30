@@ -1,0 +1,46 @@
+{
+    "name": "monkey-qol",
+    "version": "0.1.0",
+    "title": "Monkey's QoL",
+    "author": "badmonkey101",
+    "description": "",
+    "factorio_version": "1.1",
+    "dependencies": [
+        "base > 1.1.93",
+        "arrowplates",
+        "automatic-station-painter",
+        "Automatic_Train_Painter",
+        "belt-visualizer",
+        "blueprint-sandboxes",
+        "BottleneckLite",
+        "CircuitConditionScreen",
+        "CleanedConcrete",
+        "combat-mechanics-overhaul",
+        "Custom-signals",
+        "extended-descriptions",
+        "FilterHelper",
+        "flow-config",
+        "FluidWagonColorMask",
+        "holographic_signs",
+        "informatron",
+        "inventory-repair",
+        "jetpack",
+        "logtech-beacon-edit",
+        "manual-inventory-sort",
+        "PickerDollies",
+        "PipeVisualizer",
+        "quickbar-item-cycles",
+        "RecipeBook",
+        "Senpais_Invi_Tech",
+        "sonaxaton-research-queue",
+        "Squeak Through",
+        "TemporaryLogisticRequest",
+        "textplates"
+    ],
+    "package": {
+        "ignore": [
+            "resources/*",
+            "scenarios/*"
+        ]
+    }
+}

@@ -1,0 +1,22 @@
+{
+    "name": "monkey-groups",
+    "version": "0.1.0",
+    "title": "Monkey's Groups",
+    "author": "badmonkey101",
+    "description": "",
+    "factorio_version": "1.1",
+    "dependencies": [
+        "base > 1.1.93",
+        "monkey-lib",
+        "aai-pv-crafting-group",
+        "SchallCircuitGroup",
+        "SchallCircuitTransport",
+        "!Custom-Production-UI-Fixed"
+    ],
+    "package": {
+        "ignore": [
+            "resources/*",
+            "scenarios/*"
+        ]
+    }
+}
