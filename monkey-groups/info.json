@@ -8,10 +8,28 @@
     "dependencies": [
         "base > 1.1.93",
         "monkey-lib",
-        "aai-pv-crafting-group",
-        "SchallCircuitGroup",
-        "SchallCircuitTransport",
-        "!Custom-Production-UI-Fixed"
+
+        "?space-exploration",
+        "?cargo-ships",
+        "?Krastorio2",
+        "?aai-programmable-vehicles",
+        "?aai-programmable-structures",
+        "?aai-vehicles-miner",
+        "?aai-vehicles-hauler",
+        "?aai-vehicles-warden",
+        "?aai-vehicles-chaingunner",
+        "?aai-vehicles-flame-tumbler",
+        "?aai-vehicles-flame-tank",
+        "?aai-vehicles-laser-tank",
+        "?aai-signal-transmission",
+        "?shortwave_fix",
+        "?RadioNetwork",
+        "?RadioNetwork_FIX",
+
+        "!aai-pv-crafting-group",
+		"!SchallCircuitGroup",
+		"!SchallTransportGroup",
+        "!TanksSchallGroupsfixes"
     ],
     "package": {
         "ignore": [

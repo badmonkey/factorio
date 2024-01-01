@@ -20,7 +20,9 @@ local Config = { }
 
 function Config.of(modname)
   return {
-    startup = make_config(modname, "startup")
+    startup = make_config(modname, "startup"),
+    global = make_config(modname, "runtime-global"),
+    player = make_config(modname, "runtime-per-user")
   }
 end
 

@@ -2,8 +2,13 @@ local Config = require("__monkey-lib__.stdlib.config")
 
 local config = Config.of("monkey-groups")
 
+
 if config.startup.has_feature("use-ammo-group") then
   require("prototypes.group-ammo")
+end
+
+if config.startup.has_feature("use-fuel-group") then
+  require("prototypes.group-fuel")
 end
 
 if config.startup.has_feature("use-circuit-group") then

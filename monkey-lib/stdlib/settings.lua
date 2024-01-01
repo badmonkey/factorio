@@ -59,7 +59,9 @@ local Setting = { }
 
 function Setting.of(modname)
   return {
-    startup = make_settings_type(modname, "startup")
+    startup = make_settings_type(modname, "startup"),
+    global = make_settings_type(modname, "runtime-global"),
+    player = make_settings_type(modname, "runtime-per-user")
   }
 end
 
