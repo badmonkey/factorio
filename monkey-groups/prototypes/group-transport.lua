@@ -1,12 +1,16 @@
-local ItemGroup = require("lib.itemgroup")
-local Config = require("__monkey-lib__.stdlib.config")
+require("__monkey-lib__.stdlib.config")
+require("lib.itemgroup")
 
 local config = Config.of("monkey-groups")
-local transport = ItemGroup.new()
+if not config.startup.has_feature("use-transport-group") then
+  return
+end
 
 
-local values = transport:create {
-  name = "transport",
+local transport = ItemGroup("transport")
+
+
+local values = transport:create_prototypes {
   icon = "__base__/graphics/technology/automobilism.png",
   order = config.startup.value("transport-group-order"),
 

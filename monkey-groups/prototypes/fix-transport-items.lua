@@ -1,4 +1,11 @@
-local SubGroup = require("lib.subgroup")
+require("__monkey-lib__.stdlib.config")
+require("lib.subgroup")
+
+local config = Config.of("monkey-groups")
+if not config.startup.has_feature("use-transport-group") then
+  return
+end
+
 
 local subgroup = SubGroup.of("transport")
 

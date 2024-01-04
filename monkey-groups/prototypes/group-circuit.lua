@@ -1,12 +1,15 @@
-local ItemGroup = require("lib.itemgroup")
-local Config = require("__monkey-lib__.stdlib.config")
+require("__monkey-lib__.stdlib.config")
+require("lib.itemgroup")
 
 local config = Config.of("monkey-groups")
-local circuits = ItemGroup.new()
+if not config.startup.has_feature("use-circuit-group") then
+  return
+end
 
 
-local values = circuits:create {
-  name = "circuit",
+local circuits = ItemGroup("circuits")
+
+local values = circuits:create_prototypes {
   icon = "__base__/graphics/technology/circuit-network.png",
   order = config.startup.value("circuit-group-order"),
 

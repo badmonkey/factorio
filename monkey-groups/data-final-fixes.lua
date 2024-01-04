@@ -1,4 +1,18 @@
-local Config = require("__monkey-lib__.stdlib.config")
+require("__monkey-lib__.stdlib.config")
+
+require("prototypes.fix-ammo-items")
+
+require("prototypes.fix-circuit-items")
+require("compat.aai-signals")
+require("compat.radio-networks")
+
+require("prototypes.fix-transport-items")
+require("compat.aai-vehicles")
+require("compat.space-exploration")
+require("compat.krastorio2")
+require("compat.cargo-ships")
+
+
 
 local config = Config.of("monkey-groups")
 
@@ -10,33 +24,28 @@ elseif config.startup.value("expand-group-ui-slots") == "+4" then
 end
 
 
+
 if config.startup.has_feature("use-ammo-group") then
-  require("prototypes.fix-ammo-items")
+
 end
 
 
 if config.startup.has_feature("use-circuit-group") then
-  require("prototypes.fix-circuit-items")
 
-  require("compat.aai-signals")
-  require("compat.radio-networks")
 end
 
 
 if config.startup.has_feature("use-transport-group") then
-  require("prototypes.fix-transport-items")
-
-  require("compat.aai-vehicles")
 
   if mods["space-exploration"] then
-    require("compat.space-exploration")
+
   end
 
   if mods["Krastorio2"] then
-    require("compat.krastorio2")
+
   end
 
   if mods["cargo-ships"] then
-    require("compat.cargo-ships")
+
   end
 end

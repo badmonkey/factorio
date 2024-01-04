@@ -1,6 +1,12 @@
-local Subgroup = require("lib.subgroup")
+require("__monkey-lib__.stdlib.config")
+require("lib.subgroup")
 
 local config = Config.of("monkey-groups")
+if not config.startup.has_feature("use-circuit-group") then
+  return
+end
+
+
 local subgoup = Subgroup.of("circuit")
 
 subgroup.process {

@@ -4,6 +4,7 @@ require("monkey-lib.stdlib.table")
 
 local function _construct_instance(obj, klass, ...)
   if not klass then return end
+  print("K ", klass._K_name)
 
   if klass._init then
 
@@ -70,18 +71,18 @@ end
 
 
 local function defclass(typeid, base, members)
-  -- class(id: string, base: class)
-  -- class(id: string, base: class, members: map)
+  -- class.foo(base: class)
+  -- class.foo(base: class, members: map)
   if is_class(base) then
     return _defclass(typeid, base, members or {})
   end
 
-  -- class(id: string, members: map)
+  -- class.foo(members: map)
   if type(base) == "table" then
-    return _defclass(typeid, nil, members or {})
+    return _defclass(typeid, nil, base or {})
   end
 
-  -- class(id: string)
+  -- class.foo()
   return _defclass(typeid, nil, {})
 end
 

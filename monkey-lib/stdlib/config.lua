@@ -1,30 +1,29 @@
+require("stdlib.class")
 
 
-function make_config(modname, typeId)
-  local config = { }
+ConfigCheck = class.configcheck()
 
-  function config.has_feature(name)
-    return settings[typeId][modname .. "-" name].value
-  end
-
-  function config.value(name)
-    return settings[typeId][modname .. "-" name].value
-  end
-
-  return config
+function ConfigCheck:_init(modname, settings_type)
+  self.modname = modname
+  self.settings_type = settings_type
 end
 
 
-local Config = { }
+function ConfigCheck:has_feature(name)
+  return settings[self.settings_type][self.modname .. "-" name].value
+end
 
+function ConfigCheck:value(name)
+  return settings[self.settings_type][self.modname .. "-" name].value
+end
+
+
+Config = { }
 
 function Config.of(modname)
   return {
-    startup = make_config(modname, "startup"),
-    global = make_config(modname, "runtime-global"),
-    player = make_config(modname, "runtime-per-user")
+    startup = ConfigCheck(modname, "startup"),
+    global = Config.Check(modname, "runtime-global"),
+    player = ConfigCheck(modname, "runtime-per-user")
   }
 end
-
-
-return Config

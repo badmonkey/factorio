@@ -29,7 +29,8 @@ end
 function is_class(var, class)
   local _name = _class_name(var)
   if _name then
-    return (class and _class_name(class) == _name) or true
+    if not class then return true end
+    return _class_name(class) == _name
   end
   return false
 end

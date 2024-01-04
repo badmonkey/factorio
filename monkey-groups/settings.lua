@@ -1,4 +1,5 @@
-local Settings = require("__monkey-lib__.stdlib.settings")
+require("__monkey-lib__.stdlib.settings")
+
 
 local setting = Settings.of("monkey-groups")
 
@@ -8,6 +9,7 @@ data:extend {
   setting.startup:bool_on "use-circuit-group",
   setting.startup:choice {
     name = "circuit-group-order",
+
     "after-log",
     "before-log",
     "after-combat",
@@ -20,6 +22,7 @@ data:extend {
   setting.startup:bool_on "use-transport-group",
   setting.startup:choice {
     name = "transport-group-order",
+
     "after-log",
     "before-log",
     "after-combat",
@@ -31,12 +34,15 @@ data:extend {
   setting.startup:bool_on "use-ammo-group",
   setting.startup:choice {
     name = "ammo-group-order",
+
     "after-combat",
     "before-combat"
   },
+
   setting.startup:bool_on "ammo-includes-fuel",
   setting.startup:choice {
     name = "ammo-subgroup-order",
+
     "ammo-fuel",
     "fuel-ammo"
   },
@@ -45,6 +51,7 @@ data:extend {
 
   setting.startup:choice {
     name = "expand-group-ui-slots",
+
     "none",
     "plus2",
     "plus4"

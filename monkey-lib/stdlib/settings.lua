@@ -1,69 +1,64 @@
-local Ordering = require("stdlib.ordering")
+require("stdlib.class")
+require("stdlib.ordering")
 
-function make_settings_type(modname, typeId)
-  local SettingType = {
-    _order = Ordering.new(Ordering.simple)
-  }
+local Setting = class.setting()
 
-
-  function SettingType.bool_on(self, input)
-    if type(input) == string then
-      input = {name = input}
-    end
-    input.default_value = true
-    return self:boolean(input)
-  end
-
-  function SeSettingTypeool_off(self, input)
-    if type(input) == string then
-      input = {name = input}
-    end
-    input.default_value = false
-    return self:boolean(input)
-  end
-
-  function SettingType.boolean(self, input)
-    return {
-      type = "bool-setting",
-      name = modname .. "-" .. input.name,
-      order = self._order:next(),
-      setting_type = typeId,
-      default_value = input.default_value
-    },
-  end
-
-  function SettingType.choice(self, input)
-    local allowed = {}
-
-    for i, value in ipairs(input) do
-      allowed[i] = value
-    end
-
-    return {
-      type = "string-setting",
-      name = modname .. "-" .. input.name,
-      order = self._order:next(),
-      setting_type = typeId,
-      default_value = input.default_value or allowed[1]
-      allowed_values = allowed
-    }
-  end
-
-
-  return SettingType
+function Setting:_init(modname, setting_type)
+  self.modname = modname
+  self.order = Ordering(Ordering.simple)
+  self.setting_type = setting_type
 end
 
+function Setting:bool_on(input)
+  if type(input) == string then
+    input = {name = input}
+  end
+  input.default_value = true
+  return self:boolean(input)
+end
 
-local Setting = { }
+function Setting:bool_off(input)
+  if type(input) == string then
+    input = {name = input}
+  end
+  input.default_value = false
+  return self:boolean(input)
+end
 
-
-function Setting.of(modname)
+function Setting:boolean(input)
   return {
-    startup = make_settings_type(modname, "startup"),
-    global = make_settings_type(modname, "runtime-global"),
-    player = make_settings_type(modname, "runtime-per-user")
+    type = "bool-setting",
+    name = self.modname .. "-" .. input.name,
+    order = self.order:next(),
+    setting_type = self.setting_type,
+    default_value = input.default_value
+  }
+end
+
+function Setting:choice(input)
+  local allowed = {}
+
+  for i, value in ipairs(input) do
+    allowed[i] = value
+  end
+
+  return {
+    type = "string-setting",
+    name = self.modname .. "-" .. input.name,
+    order = self.order:next(),
+    setting_type = self.setting_type,
+    default_value = input.default_value or allowed[1]
+    allowed_values = allowed
   }
 end
 
 
-return Setting
+Settings = { }
+
+function Settings.of(modname)
+  return {
+    startup = Setting(modname, "startup"),
+    global = Setting(modname, "runtime-global"),
+    player = Setting(modname, "runtime-per-user")
+  }
+end
