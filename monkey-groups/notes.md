@@ -23,7 +23,7 @@ z       other
 
 
 ## sort order
-utf8 lexiographically
+utf8 lexicographically
 
 "-" "0-9" "A-Z" "[]" "a-z"
 

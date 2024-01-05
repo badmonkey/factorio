@@ -14,7 +14,7 @@ fi
 
 VERSION=$(jq -r .version "${MODNAME}/info.json")
 
-ZIPFILE="build/${MODNAME}-${VERSION}.zip"
+ZIPFILE="build/${MODNAME}_${VERSION}.zip"
 ZIGNORE="${MODNAME}/.zipignore"
 IGNOREFILE="build/${MODNAME}-ignore"
 

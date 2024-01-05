@@ -1,24 +1,24 @@
-require("stdlib.class")
-require("stdlib.ordering")
+require("__monkey-lib__.stdlib.class")
+require("__monkey-lib__.stdlib.ordering")
 
 local Setting = class.setting()
 
 function Setting:_init(modname, setting_type)
-  self.modname = modname
-  self.order = Ordering(Ordering.simple)
-  self.setting_type = setting_type
+  self._modname = modname
+  self._order = Ordering(Ordering.simple)
+  self._setting_type = setting_type
 end
 
 function Setting:bool_on(input)
-  if type(input) == string then
-    input = {name = input}
+  if type(input) == "string" then
+    input = { name = input }
   end
-  input.default_value = true
+  input.default_value = false
   return self:boolean(input)
 end
 
 function Setting:bool_off(input)
-  if type(input) == string then
+  if type(input) == "string" then
     input = {name = input}
   end
   input.default_value = false
@@ -28,9 +28,9 @@ end
 function Setting:boolean(input)
   return {
     type = "bool-setting",
-    name = self.modname .. "-" .. input.name,
-    order = self.order:next(),
-    setting_type = self.setting_type,
+    name = self._modname .. "-" .. input.name,
+    order = self._order:next(),
+    setting_type = self._setting_type,
     default_value = input.default_value
   }
 end
@@ -44,10 +44,10 @@ function Setting:choice(input)
 
   return {
     type = "string-setting",
-    name = self.modname .. "-" .. input.name,
-    order = self.order:next(),
-    setting_type = self.setting_type,
-    default_value = input.default_value or allowed[1]
+    name = self._modname .. "-" .. input.name,
+    order = self._order:next(),
+    setting_type = self._setting_type,
+    default_value = input.default_value or allowed[1],
     allowed_values = allowed
   }
 end

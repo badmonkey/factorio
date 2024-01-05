@@ -1,32 +1,31 @@
-require("monkey-lib.stdlib.typef")
-require("monkey-lib.stdlib.table")
+require("__monkey-lib__.stdlib.object")
+require("__monkey-lib__.stdlib.luaextend")
+
 
 
 local function _construct_instance(obj, klass, ...)
   if not klass then return end
-  print("K ", klass._K_name)
 
   if klass._init then
-
-    if klass._K_extends then
+    if klass._cl_extends then
       obj.super = function(self, ...)
-        _construct_instance(obj, klass._K_extends, ...)
+        _construct_instance(obj, klass._cl_extends, ...)
         self.super = nil
       end
     else
       obj.super = function(self, ...)
-        error("class "..klass._K_name.." has no base class to call super() on!")
+        error("class "..klass._cl_name.." has no base class to call super() on!")
       end
     end
 
     klass._init(obj, ...)
 
-    if klass._K_extends and obj.super ~= nil then
-      error("class " .. klass._K_name .. " failed to call super()")
+    if klass._cl_extends and obj.super ~= nil then
+      error("class " .. klass._cl_name .. " failed to call super()")
     end
 
   else
-    _construct_instance(obj, klass._K_extends, ...)
+    _construct_instance(obj, klass._cl_extends, ...)
   end
 end
 
@@ -34,7 +33,7 @@ end
 local _KLASS_METATABLE = {
   __call = function(class_tbl, ...)
     local obj = {
-      __type = class_tbl._K_name
+      __type = class_tbl._cl_name
     }
 
     setmetatable(obj, class_tbl)
@@ -48,8 +47,8 @@ local _KLASS_METATABLE = {
 local function _defclass(typeid, base, members)
   local klass = {
     __type = "class",
-    _K_name = typeid,
-    _K_extends = base
+    _cl_name = typeid,
+    _cl_extends = base
   }
 
   table.copy_into(klass, members)
@@ -58,11 +57,11 @@ local function _defclass(typeid, base, members)
     local v = rawget(klass, key)
     if v ~= nil then return v end
 
-    local base = rawget(klass, "_K_extends")
+    local base = rawget(klass, "_cl_extends")
     if base ~= nil then return base[key] end
 
     -- property getter?
-    error("missing member "..key)
+    error("missing member " .. rawget(klass, "_cl_name") .. "." .. key)
   end
 
   setmetatable(klass, _KLASS_METATABLE)
@@ -73,7 +72,7 @@ end
 local function defclass(typeid, base, members)
   -- class.foo(base: class)
   -- class.foo(base: class, members: map)
-  if is_class(base) then
+  if object.is_class(base) then
     return _defclass(typeid, base, members or {})
   end
 
