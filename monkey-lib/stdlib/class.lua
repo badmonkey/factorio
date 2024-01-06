@@ -54,14 +54,23 @@ local function _defclass(typeid, base, members)
   table.copy_into(klass, members)
 
   function klass.__index(tbl, key)
-    local v = rawget(klass, key)
-    if v ~= nil then return v end
+    local value = rawget(klass, key)
+    if value then return v end
 
-    local base = rawget(klass, "_cl_extends")
-    if base ~= nil then return base[key] end
+    local super_klass = rawget(klass, "_cl_extends")
+    if super_klass then return super_klass[key] end
 
-    -- property getter?
+    local prop = rawget(klass, "_property")
+    if prop then return prop(tbl, key, klass) end
+
     error("missing member " .. rawget(klass, "_cl_name") .. "." .. key)
+  end
+
+  function klass.__call(tbl, ...)
+    local caller = rawget(klass, "_call")
+    if caller then return caller(tbl, ...) end
+
+    error("calling instance of " .. object.name(tbl) .. " without a _call method")
   end
 
   setmetatable(klass, _KLASS_METATABLE)

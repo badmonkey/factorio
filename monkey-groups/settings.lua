@@ -48,15 +48,4 @@ data:extend {
     "after-combat",
     "before-combat"
   },
-
-
-  -- Expand UI for all the new groups
-
-  setting.startup:choice {
-    name = "expand-group-ui-slots",
-
-    "none",
-    "plus2",
-    "plus4"
-  }
 }

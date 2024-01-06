@@ -1,7 +1,7 @@
 {
     "name": "monkey-groups",
     "version": "0.1.0",
-    "title": "Monkey's Groups",
+    "title": "Simple Item Groups",
     "author": "badmonkey101",
     "description": "",
     "factorio_version": "1.1",
@@ -12,10 +12,11 @@
         "?space-exploration",
         "?Krastorio2",
         "?cargo-ships",
+
         "?Aircraft",
         "?ElectricTrain",
+        "?se-space-trains",
         "?aai-programmable-vehicles",
-        "?aai-programmable-structures",
         "?aai-vehicles-ironclad",
         "?aai-vehicles-miner",
         "?aai-vehicles-hauler",
@@ -24,7 +25,11 @@
         "?aai-vehicles-flame-tumbler",
         "?aai-vehicles-flame-tank",
         "?aai-vehicles-laser-tank",
+
+        "?fcpu",
+        "?power-combinator",
         "?aai-signal-transmission",
+        "?aai-programmable-structures",
         "?shortwave_fix",
         "?RadioNetwork",
         "?RadioNetwork_FIX",

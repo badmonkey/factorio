@@ -7,19 +7,35 @@ if not config.startup:has_feature("use-circuit-group") then
 end
 
 
-local subgroup = Subgroup("circuit")
+local modgroup = Subgroup("circuit")
 
-subgroup:process {
-  destination = "combinator",
+modgroup("combinator").update {
+  Subgroup.move_item "arithmetic-combinator",
+  Subgroup.move_item "decider-combinator",
+  Subgroup.move_item "constant-combinator",
 
-  subgroup.move_item "arithmetic-combinator",
-  subgroup.move_item "decider-combinator",
-  subgroup.move_item "constant-combinator",
+  Subgroup.with("power-combinator").move_item "power-combinator-MK2",
+  Subgroup.with("fcpu").move_item "fcpu",
 
-  subgroup.move_matching_items(".+[-]combinator$", "circuit-network")
+  Subgroup.move_matching_items(".+[-]combinator$", "circuit-network"),
 }
 
 
-if mods["shortwave_fix"] then
+modgroup("transmission").update {
+  Subgroup.with("shortwave_fix").move_item("shortwave-radio"),
 
-end
+  Subgroup.when(mods["RadioNetwork"] or mods["RadioNetwork_FIX"]).update {
+    Subgroup.move_item "radio-transmitter-1",
+    Subgroup.move_item "radio-transmitter-2",
+    Subgroup.move_item "radio-transmitter-3",
+
+    Subgroup.move_item "radio-receiver-1",
+    Subgroup.move_item "radio-receiver-2",
+    Subgroup.move_item "radio-receiver-3",
+  },
+
+  Subgroup.with("aai-signal-transmission").update {
+    Subgroup.move_item "aai-signal-sender",
+    Subgroup.move_item "aai-signal-receiver",
+  },
+}

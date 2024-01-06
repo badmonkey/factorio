@@ -31,14 +31,7 @@ local values = transport:create_prototypes {
   -- vehicles
 
   transport.subgroup "civilian",
-  transport.subgroup "water",
   transport.subgroup "military",
-
-  -- trains and railway
-
-  transport.use_existing "train-transport",     -- vanilla default
-  transport.subgroup "stdrail",
-  transport.use_existing_when("rail", "space-exploration"),
 
   -- if we're splitting rolling stock subgroups
   transport.when {
@@ -49,11 +42,13 @@ local values = transport:create_prototypes {
     transport.subgroup "fluid-wagon",
   },
 
-  -- equipment subgroups
+  transport.use_existing "train-transport",
+  transport.use_existing_when("rail", "space-exploration"),
 
-  transport.subgroup "equipment",
-  transport.subgroup "equipment-military",
-  transport.subgroup "equipment-defense",
+  transport.subgroup "water",
+  transport.use_existing_when("water_transport", "cargo-ships"),
+
+  transport.subgroup "aircraft",
 
   -- utility subgroups
 

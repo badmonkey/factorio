@@ -24,10 +24,12 @@ local values = circuit:create_prototypes {
   order = circuit_order,
 
   circuit.use_existing "circuit-network",
+
   circuit.subgroup "combinator",
+
   circuit.subgroup "transmission",
 
-  circuit.use_existing_when("programmable-structures", "aai-programmable-vehicles")
+  circuit.use_existing_when("programmable-structures", "aai-programmable-structures")
 }
 
 data:extend(values)
